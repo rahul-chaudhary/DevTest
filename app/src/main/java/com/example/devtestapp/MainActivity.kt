@@ -11,7 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.viewinterop.AndroidView
 import com.example.devtestapp.ui.theme.DevTestAppTheme
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +25,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             DevTestAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+
+                    Chart()
                 }
             }
         }
@@ -31,17 +34,33 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+fun Chart() {
+    // Sample data for the chart
+    val entries = listOf(
+        Entry(0f, 4f),
+        Entry(1f, 8f),
+        Entry(2f, 6f),
+        Entry(3f, 2f),
+        Entry(4f, 18f),
+        Entry(5f, 9f)
     )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DevTestAppTheme {
-        Greeting("Android")
+    val dataSet = LineDataSet(entries, "Sample Data").apply {
+        color = android.graphics.Color.BLUE
+        valueTextColor = android.graphics.Color.BLACK
     }
+
+    val lineData = LineData(dataSet)
+
+    // AndroidView to host the MPAndroidChart LineChart
+    AndroidView(
+        factory = { context ->
+            LineChart(context).apply {
+                this.data = lineData
+                description.text = "Sample Line Chart"
+                invalidate() // Refresh the chart
+            }
+        },
+        modifier = Modifier.fillMaxSize()
+    )
 }
