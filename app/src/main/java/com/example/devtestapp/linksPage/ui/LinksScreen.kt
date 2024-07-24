@@ -131,7 +131,7 @@ fun LinksScreen(navController: NavController, context: Context) {
     Scaffold(containerColor = clrWhiteOff, bottomBar = {
         BottomAppBar(
             modifier = Modifier
-                .height(70.dp)
+                .height(100.dp)
                 .fillMaxWidth(1f)
                 .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)),
             containerColor = Color.White,
@@ -169,12 +169,13 @@ fun LinksScreen(navController: NavController, context: Context) {
                     .weight(1.5f, true)
                     .fillMaxSize(1f)
                     .padding(vertical = 8.dp)
+
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.addcircle2),
                     contentDescription = "Add",
                     tint = Color.Unspecified,
-                    modifier = Modifier.size(100.dp)
+
                 )
             }
             //Campaign

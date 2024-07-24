@@ -71,8 +71,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     //MPAndroidChart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    //coil
-    implementation("io.coil-kt:coil-compose:2.5.0")
     //Volley
     implementation("com.android.volley:volley:1.2.1")
     //gson
