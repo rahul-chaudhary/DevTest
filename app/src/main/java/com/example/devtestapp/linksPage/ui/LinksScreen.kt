@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.SystemClock
 import android.provider.ContactsContract.Profile
 import android.util.Log
 import android.widget.Toast
@@ -136,7 +137,8 @@ fun LinksScreen(navController: NavController, context: Context) {
             containerColor = Color.White,
         ) {
             //Links
-            IconButton(onClick = {},
+            IconButton(
+                onClick = {},
                 modifier = Modifier
                     .weight(1f, true)
                     .size(24.dp)
@@ -149,7 +151,8 @@ fun LinksScreen(navController: NavController, context: Context) {
                 )
             }
             //Courses
-            IconButton(onClick = {},
+            IconButton(
+                onClick = {},
                 modifier = Modifier
                     .weight(1f, true)
                     .size(24.dp)
@@ -161,10 +164,11 @@ fun LinksScreen(navController: NavController, context: Context) {
                 )
             }
             //Add
-            IconButton(onClick = {}, modifier = Modifier
-                .weight(1.5f, true)
-                .fillMaxSize(1f)
-                .padding(vertical = 8.dp)
+            IconButton(
+                onClick = {}, modifier = Modifier
+                    .weight(1.5f, true)
+                    .fillMaxSize(1f)
+                    .padding(vertical = 8.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.addcircle2),
@@ -174,9 +178,11 @@ fun LinksScreen(navController: NavController, context: Context) {
                 )
             }
             //Campaign
-            IconButton(onClick = {}, modifier = Modifier
-                .weight(1f, true)
-                .size(24.dp)) {
+            IconButton(
+                onClick = {}, modifier = Modifier
+                    .weight(1f, true)
+                    .size(24.dp)
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.campaignmarketing1),
                     contentDescription = "Campaign",
@@ -184,9 +190,11 @@ fun LinksScreen(navController: NavController, context: Context) {
                 )
             }
             //Profile
-            IconButton(onClick = {}, modifier = Modifier
-                .weight(1f, true)
-                .size(24.dp)) {
+            IconButton(
+                onClick = {}, modifier = Modifier
+                    .weight(1f, true)
+                    .size(24.dp)
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.profile3),
                     contentDescription = "Profile",
@@ -249,7 +257,7 @@ fun LinksScreen(navController: NavController, context: Context) {
                             Color.Black,
                             Color.Unspecified,
                             BorderStroke(1.dp, clrGreenLight2),
-                        ){
+                        ) {
                             openWhatsAppChat(context, response.value!!.support_whatsapp_number)
                         }
                     }
@@ -361,7 +369,8 @@ private fun LinksCard(
                         }
                 )
                 IconButton(onClick = {
-                    val clipboardManager: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    val clipboardManager: ClipboardManager =
+                        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                     val clip = ClipData.newPlainText("Copied Text ", webLink)
                     clipboardManager.setPrimaryClip(clip)
                     Toast.makeText(context, "Link Copied!", Toast.LENGTH_SHORT).show()
@@ -463,7 +472,7 @@ private fun OutlineTextButton(txt: String, drawableID: Int) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier.size(32.dp),
-                painter = painterResource(id =drawableID),
+                painter = painterResource(id = drawableID),
                 contentDescription = "Icon",
                 tint = Color.Unspecified
             )
@@ -502,14 +511,15 @@ private fun OutlineTextColoredButton(
         ),
         border = borderStroke
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier
                 .fillMaxWidth(1f)
                 .padding(horizontal = 12.dp)
         ) {
             Icon(
-                painter = painterResource(id =drawableID),
+                painter = painterResource(id = drawableID),
                 contentDescription = "Icon",
                 tint = iconTint,
                 modifier = Modifier.size(36.dp)
@@ -546,10 +556,34 @@ private fun GreetingsText() {
 @Composable
 private fun LazyRowCards(response: MutableState<ApiResponse?>) {
     LazyRow(modifier = Modifier.padding(end = 12.dp)) {
-        item { QuickCard(response.value?.today_clicks.toString(), "Today's Click", R.drawable.click1) }
-        item { QuickCard(response.value?.top_location.toString(), "Top Location", R.drawable.location1) }
-        item { QuickCard(response.value?.top_source.toString(), "Top Source", R.drawable.internet1 ) }
-        item { QuickCard('₹' + response.value?.extra_income.toString(), "Extra Income", R.drawable.money1) }
+        item {
+            QuickCard(
+                response.value?.today_clicks.toString(),
+                "Today's Click",
+                R.drawable.click1
+            )
+        }
+        item {
+            QuickCard(
+                response.value?.top_location.toString(),
+                "Top Location",
+                R.drawable.location1
+            )
+        }
+        item {
+            QuickCard(
+                response.value?.top_source.toString(),
+                "Top Source",
+                R.drawable.internet1
+            )
+        }
+        item {
+            QuickCard(
+                '₹' + response.value?.extra_income.toString(),
+                "Extra Income",
+                R.drawable.money1
+            )
+        }
 
 
     }
@@ -587,7 +621,7 @@ private fun QuickCard(title: String, description: String, drawableID: Int) {
                 text = description,
                 fontSize = 16.sp,
                 color = clrGrey,
-                modifier = Modifier.padding(vertical = 12.dp,horizontal = 12.dp)
+                modifier = Modifier.padding(vertical = 12.dp, horizontal = 12.dp)
             )
         }
     }
@@ -605,8 +639,36 @@ private fun GraphOverviewCard() {
         modifier = Modifier
             .padding(12.dp)
             .fillMaxWidth(1f)
-            .height(150.dp),
+            .height(200.dp),
     ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = "OverView",
+                fontSize = 16.sp,
+                color = clrGrey,
+                modifier = Modifier
+                    .padding(vertical = 12.dp, horizontal = 12.dp)
+                    .weight(1.3f)
+            )
+            Text(
+                text = "22 Aug - 23 Sept",
+                fontSize = 16.sp,
+                color = Color.Black,
+                textAlign = TextAlign.End,
+                modifier = Modifier
+                    .padding(0.dp)
+                    .weight(1f)
+            )
+            Icon(
+                painter = painterResource(id = R.drawable.time1),
+                contentDescription = "time",
+                tint = clrGrey,
+                modifier = Modifier
+                    .padding(start = 6.dp, end = 12.dp)
+                    .size(16.dp)
+                    .weight(0.3f)
+            )
+        }
         Box(
             modifier = Modifier
                 .padding(12.dp)
@@ -621,7 +683,7 @@ private fun GraphOverviewCard() {
 private fun LinksTopBar() {
     Row(
         modifier = Modifier
-            .height(100.dp)
+            .height(70.dp)
             .fillMaxWidth(1f)
             .background(color = clrBlue),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -635,8 +697,8 @@ private fun LinksTopBar() {
         )
         IconButton(onClick = {}) {
             Icon(
-                imageVector = Icons.Default.Settings,
-                contentDescription = "Menu",
+                painter = painterResource(id = R.drawable.setting1),
+                contentDescription = "Settings",
                 tint = Color.White
             )
         }
