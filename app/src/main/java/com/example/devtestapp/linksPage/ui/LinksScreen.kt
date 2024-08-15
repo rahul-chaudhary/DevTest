@@ -644,7 +644,7 @@ private fun GraphOverviewCard() {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = "OverView",
+                text = "Overview",
                 fontSize = 16.sp,
                 color = clrGrey,
                 modifier = Modifier
